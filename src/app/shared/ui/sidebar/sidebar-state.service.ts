@@ -1,19 +1,23 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, signal } from '@angular/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router'; // 1. Import Router Events
+import { Injectable, signal, inject, afterNextRender } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarStateService {
-  private readonly body: HTMLElement;
+  private readonly document = inject(DOCUMENT);
+  private readonly router = inject(Router);
+  private readonly body = this.document.body;
 
   isCollapsed = signal(false);
   isMobileOpen = signal(false);
 
-  constructor(@Inject(DOCUMENT) document: Document, private router: Router) { // 2. Inject Router
-    this.body = document.body;
-    this.isCollapsed.set(localStorage.getItem('emsSidebarCollapsed') === 'true');
+  constructor() {
+    // initialize state after it has finished rendering for 1st time
+    afterNextRender(() => {
+      this.isCollapsed.set(localStorage.getItem('emsSidebarCollapsed') === 'true');
+    });
     this.syncBodyClasses();
 
     // 3. Automatically freeze animations ONLY during page switches
