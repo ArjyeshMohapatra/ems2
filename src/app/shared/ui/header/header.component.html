@@ -22,11 +22,11 @@
       class="mobile-menu-btn"
       (click)="toggleMobileSidebar($event)"
       aria-controls="appSidebar"
-      [attr.aria-expanded]="sidebarState.isMobileOpen"
+      [attr.aria-expanded]="sidebarState.isMobileOpen()"
       aria-label="Toggle sidebar"
       title="Toggle sidebar"
     >
-      <i class="fa-solid" [ngClass]="sidebarState.isMobileOpen ? 'fa-xmark' : 'fa-bars'"></i>
+      <i class="fa-solid" [ngClass]="sidebarState.isMobileOpen() ? 'fa-xmark' : 'fa-bars'"></i>
     </button>
   </div>
 </header>

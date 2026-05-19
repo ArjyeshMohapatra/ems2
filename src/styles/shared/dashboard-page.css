@@ -22,7 +22,7 @@
 	overflow: auto;
 }
 
-body.sidebar-collapsed .dashboard-page .content {
+.dashboard-page.sidebar-collapsed .content {
     margin-left: var(--sidebar-collapsed);
 }
 
@@ -62,11 +62,11 @@ body.sidebar-collapsed .dashboard-page .content {
 		transition: margin-top 0.28s ease;
 	}
 
-	body.sidebar-collapsed .dashboard-page .content {
+	.dashboard-page.sidebar-collapsed .content {
 		margin-left: 0;
 	}
 
-	body.mobile-sidebar-open .dashboard-page .content {
+	.dashboard-page.mobile-sidebar-open .content {
 		margin-top: var(--mobile-sidebar-height);
 	}
 
