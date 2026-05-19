@@ -23,11 +23,9 @@
 	box-sizing: border-box;
 	margin-left: var(--sidebar-expanded);
 	overflow: auto;
-}
-
-.dashboard-page.sidebar-animating .content{
 	transition: margin-left 0.25s ease;
 }
+
 
 .dashboard-page.sidebar-collapsed .content {
     margin-left: var(--sidebar-collapsed);

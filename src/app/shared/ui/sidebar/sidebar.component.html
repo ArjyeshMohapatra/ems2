@@ -1,7 +1,5 @@
-<aside id="appSidebar" class="sidebar" 
-[class.sidebar-collapsed]="sidebarState.isCollapsed()" 
-[class.mobile-sidebar-open]="sidebarState.isMobileOpen()"
-[class.sidebar-animating]="sidebarState.isAnimating()">
+<aside id="appSidebar"
+  class="sidebar {{ sidebarState.isCollapsed() ? 'sidebar-collapsed' : '' }} {{ sidebarState.isMobileOpen() ? 'mobile-sidebar-open' : '' }}">
   <div class="sidebar-top">
     <button
       type="button"

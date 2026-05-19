@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Replaces CommonModule from the old module
 import { RouterModule } from '@angular/router'; // Required for routerLink in HTML
 
@@ -20,16 +20,14 @@ import { PageLayoutComponent } from '@shared/ui';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy{
-  dailyWorkTime = '0';
-  leaveStatus = 'No Info';
+  dailyWorkTime = signal('0');
+  leaveStatus = signal('No Info');
   private timerId: ReturnType<typeof setInterval> | null = null;
 
-  constructor(
-    private attendanceService: AttendanceService,
-    private leaveService: LeaveService,
-    private crs: CheckRegistrationService,
-    private loader: LoadingService
-  ) { }
+  private attendanceService = inject(AttendanceService);
+  private leaveService = inject(LeaveService);
+  private crs = inject(CheckRegistrationService);
+  private loader = inject(LoadingService);
 
   ngOnInit(): void {
     const startTime = Date.now();
@@ -55,17 +53,17 @@ export class DashboardComponent implements OnInit, OnDestroy{
   loadLeaveStatus(): void{
     const employeeId = localStorage.getItem('employeeId');
     if (!employeeId) {
-      this.leaveStatus = 'No Info';
+      this.leaveStatus.set('No Info');
       return;
     }
     this.leaveService.getLeavesByEmpId(employeeId).subscribe({
       next: (res: any) => {
         const leaves = res?.data || [];
         const latestLeave = leaves[0];
-        this.leaveStatus = latestLeave?.status ?? 'No Info';
+        this.leaveStatus.set(latestLeave?.status ?? 'No Info');
       },
       error: () => {
-        this.leaveStatus = 'No Info';
+        this.leaveStatus.set('No Info');
       }
     })
   }
@@ -79,12 +77,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
         const item = res?.data?.[0];
 
         if (!item?.in_time) {
-          this.dailyWorkTime = '0';
+          this.dailyWorkTime.set('0');
           return;
         }
 
         const updateTime = () => {
-          this.dailyWorkTime = this.formatDailyDuration(item.in_time, item.out_time || undefined);
+          this.dailyWorkTime.set(this.formatDailyDuration(item.in_time, item.out_time || undefined));
         };
 
         updateTime();
@@ -97,7 +95,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
         if (!item.out_time) this.timerId = setInterval(updateTime, 60000);
       },
       error: () => {
-        this.dailyWorkTime = '0';
+        this.dailyWorkTime.set('0');
       }
     });
   }

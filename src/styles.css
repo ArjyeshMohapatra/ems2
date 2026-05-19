@@ -6,3 +6,10 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+/* Neutralize all layout flashes, shivers, and jumps while switching routes */
+body.no-transitions *,
+body.no-transitions *::before,
+body.no-transitions *::after {
+    transition: none !important;
+    animation: none !important;
+}

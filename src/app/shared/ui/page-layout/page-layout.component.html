@@ -1,6 +1,5 @@
-<div class="dashboard-page" [class.sidebar-collapsed]="sidebarState.isCollapsed()"
-[class.mobile-sidebar-open]="sidebarState.isMobileOpen()"
-[class.sidebar-animating]="sidebarState.isAnimating()">
+<div
+  class="dashboard-page {{ sidebarState.isCollapsed() ? 'sidebar-collapsed' : '' }} {{ sidebarState.isMobileOpen() ? 'mobile-sidebar-open' : '' }} ">
   <app-header [title]="title"></app-header>
 
   <div class="dashboard-body">

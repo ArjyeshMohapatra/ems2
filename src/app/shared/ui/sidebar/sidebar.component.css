@@ -13,9 +13,6 @@
   bottom: 0;
   left:0;
   z-index: 999;
-}
-
-.sidebar.sidebar-animating{
   transition: width 0.25s ease, flex-basis 0.25s ease, padding 0.25s ease;
 }
 
