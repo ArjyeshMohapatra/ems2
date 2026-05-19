@@ -1,0 +1,37 @@
+<div class="table-wrapper">
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="w-100"
+      [class.resizable-table]="resizableColumns"
+    >
+      <colgroup *ngIf="resizableColumns">
+        <col
+          *ngFor="let column of displayedColumns"
+          [style.width.px]="getColumnWidth(column)"
+        />
+      </colgroup>
+
+      <!-- content projection i.e. parent's HTML gets inserted in here -->
+      <ng-content></ng-content>
+  
+      <ng-container *ngIf="columnsReady">
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell text-center p-3" [attr.colspan]="displayedColumns.length">
+            No data to show
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  
+    <mat-paginator
+      [length]="totalRecords"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageChange.emit($event)">
+    </mat-paginator>
+  
+  </div>

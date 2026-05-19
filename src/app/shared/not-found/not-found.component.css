@@ -1,0 +1,66 @@
+.not-found-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 32%),
+      linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+    padding: 24px;
+  }
+  
+  .not-found-card {
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 48px 32px;
+    color: #000000;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  }
+  
+  .not-found-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 76px;
+    font-weight: 800;
+    background:
+      radial-gradient(circle, rgba(37, 99, 235, 0.08), transparent 32%),
+      linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+    color: #0f172a;
+    line-height: 1;
+  }
+  
+  .not-found-card h1 {
+    margin: 0 0 12px;
+    font-size: 44px;
+    letter-spacing: -0.04em;
+  }
+  
+  .not-found-card p {
+    margin: 0 0 28px;
+    font-size: 16px;
+    color: #000000;
+  }
+  
+  .back-btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .back-btn:hover {
+    background: linear-gradient(135deg, #2b55b1, #1d4ed8);
+  }

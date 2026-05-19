@@ -1,0 +1,13 @@
+<div class="dashboard-page">
+  <app-header [title]="title"></app-header>
+
+  <div class="dashboard-body">
+    <app-sidebar></app-sidebar>
+
+    <section class="content">
+      <div class="content-panel">
+        <ng-content></ng-content>
+      </div>
+    </section>
+  </div>
+</div>

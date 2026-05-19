@@ -1,0 +1,68 @@
+<aside id="appSidebar" class="sidebar" [class.sidebar-collapsed]="sidebarState.isCollapsed" [class.mobile-sidebar-open]="sidebarState.isMobileOpen">
+  <div class="sidebar-top">
+    <button
+      type="button"
+      class="menu-btn desktop-menu-btn"
+      (click)="toggleSidebar()"
+      aria-label="Toggle sidebar"
+      title="Toggle sidebar"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <h1 class="page-title">EMS</h1>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      class="nav-item"
+      (click)="closeMobileSidebar()"
+    >
+      <i class="fa-solid fa-house"></i>
+      <span class="label">Dashboard</span>
+    </a>
+
+    <a routerLink="/employees-details" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
+      <i class="fa-solid fa-users"></i>
+      <span class="label">Employees Details</span>
+    </a>
+
+    <a routerLink="/edit-profile" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
+      <i class="fa-solid fa-user-pen"></i>
+      <span class="label">Edit Profile</span>
+    </a>
+
+    <a routerLink="/attendance-mgmt" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
+      <i class="fa-solid fa-calendar-check"></i>
+      <span class="label">Attendance Mgmt</span>
+    </a>
+
+    <a routerLink="/leave-mgmt" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
+      <i class="fa-solid fa-handshake-simple"></i>
+      <span class="label">Leave Mgmt</span>
+    </a>
+
+    <ng-container *ngIf="!hrPortalBlocked; else blockedHrPortal">
+      <a routerLink="/hr-portal" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
+        <div class="icon-wrapper relative">
+          <i class="fa-solid fa-person"></i>
+          <!-- Badge for Pending Count -->
+          <ng-container *ngIf="(leaveService.pendingCount$ | async) as count">
+            <span *ngIf="count > 0" class="badge-dot">
+              {{ count }}
+            </span>
+          </ng-container>
+        </div>
+        <span class="label">HR Portal</span>
+      </a>
+    </ng-container>
+
+    <ng-template #blockedHrPortal>
+      <span class="nav-item nav-item-disabled" title="You have to be an admin or HR in order to access this page">
+        <i class="fa-solid fa-person"></i>
+        <span class="label">HR Portal</span>
+      </span>
+    </ng-template>
+  </nav>
+</aside>

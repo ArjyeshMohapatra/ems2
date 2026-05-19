@@ -1,0 +1,115 @@
+<app-page-layout [title]="'HR Portal'">
+  <div class="card p-3">
+    <h5 class="mb-3">All Leave Requests</h5>
+
+    <div class="row g-3 align-items-stretch mb-3">
+      <div class="col-12 col-lg-8">
+        <app-search-bar
+          class="w-100"
+          placeholder="Search leaves..."
+          (search)="filterLeaves($event)">
+        </app-search-bar>
+      </div>
+
+      <div class="col-12 col-lg-4 mb-3">
+        <select
+          #leaveStatus
+          class="form-select status-select w-100"
+          aria-label="Filter leave requests by status"
+          (change)="filterByStatus(leaveStatus.value)"
+        >
+          <option
+            *ngFor="let status of statuses"
+            [value]="status"
+          >
+            {{ status }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-responsive border rounded">
+      <app-table 
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      [totalRecords]="totalRecords"
+      (pageChange)="onPageChange($event)"
+      class="w-100">
+
+        <!-- SL -->
+        <ng-container matColumnDef="slNo">
+          <th mat-header-cell *matHeaderCellDef>Sl No.</th>
+          <td mat-cell *matCellDef="let el">{{ el.slNo }}</td>
+        </ng-container>
+
+        <!-- EMPLOYEE -->
+        <ng-container matColumnDef="employeeName">
+          <th mat-header-cell *matHeaderCellDef>Employee Name</th>
+          <td mat-cell *matCellDef="let el">{{ el.employeeName }}</td>
+        </ng-container>
+
+        <!-- FROM -->
+        <ng-container matColumnDef="from_date">
+          <th mat-header-cell *matHeaderCellDef>From</th>
+          <td mat-cell *matCellDef="let el">
+            {{ el.from_date | date:'dd-MM-yyyy' }}
+          </td>
+        </ng-container>
+
+        <!-- TO -->
+        <ng-container matColumnDef="to_date">
+          <th mat-header-cell *matHeaderCellDef>To</th>
+          <td mat-cell *matCellDef="let el">
+            {{ el.to_date | date:'dd-MM-yyyy' }}
+          </td>
+        </ng-container>
+
+        <!-- REASON -->
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>Reason</th>
+          <td mat-cell *matCellDef="let el">{{ el.reason }}</td>
+        </ng-container>
+
+        <!-- STATUS -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let el">
+            <span
+              [ngClass]="{
+                'text-warning': el.status === 'PENDING',
+                'text-success': el.status === 'APPROVED',
+                'text-danger': el.status === 'REJECTED'
+              }">
+              {{ el.status }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- ACTION -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+
+          <td mat-cell *matCellDef="let el">
+
+            <button
+              *ngIf="el.status === 'PENDING'"
+              class="btn btn-success btn-sm me-2"
+              (click)="approveLeave(el.id)">
+              Approve
+            </button>
+
+            <button
+              *ngIf="el.status === 'PENDING'"
+              class="btn btn-danger btn-sm"
+              (click)="rejectLeave(el.id)">
+              Reject
+            </button>
+
+          </td>
+        </ng-container>
+
+      </app-table>
+    </div>
+
+  </div>
+</app-page-layout>

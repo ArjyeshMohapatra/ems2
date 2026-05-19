@@ -1,0 +1,221 @@
+:host {
+    display: block;
+  }
+   
+  .employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .profile-actions {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  }
+
+  .section-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .section-tab {
+    width: auto;
+    padding: 9px 14px;
+    border: 1px solid #dbe4ef;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .section-tab.active {
+    border-color: #0f172a;
+    background: #0f172a;
+    color: #ffffff;
+  }
+
+  .edit-actions {
+    display: flex;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .profile-actions .action-btn {
+    width: auto;
+    min-width: 96px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .profile-actions .secondary {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #1e293b;
+  }
+
+  .profile-actions .primary {
+    border: 1px solid #0f766e;
+    background: #0f766e;
+    color: #ffffff;
+  }
+
+  .profile-actions .action-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+   
+  .section-card {
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.26);
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+  }
+   
+  .section-heading {
+    position: relative;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eef2f7;
+  }
+   
+  .section-heading h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+   
+  .section-heading p:last-child {
+    margin: 6px 0 0;
+    color: #64748b;
+    line-height: 1.5;
+  }
+   
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+   
+  .field {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field label {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    min-height: 42px;
+    padding: 10px;
+  }
+
+  .is-readonly .field input,
+  .is-readonly .field select,
+  .is-readonly .field textarea {
+    border-color: #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
+    cursor: default;
+    opacity: 1;
+  }
+   
+  .field--12 {
+    grid-column: 1 / -1;
+  }
+   
+  .error {
+    margin: 4px 0 0;
+    color: #b91c1c;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 42px;
+
+  padding: 10px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+
+  background: #f8fafc;
+
+  color: #0f172a;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  background: #f8fafc;
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+   
+  @media (max-width: 480px) {
+    .profile-actions {
+      position: static;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .section-tabs {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .edit-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .profile-actions .action-btn {
+      min-width: 0;
+    }
+
+    .section-card {
+      padding: 12px;
+    }
+   
+    .field-grid {
+      flex-direction: column;
+    }
+  }

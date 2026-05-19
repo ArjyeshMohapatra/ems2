@@ -1,0 +1,92 @@
+<app-page-layout [title]="'Dashboard'">
+  <div class="row g-3">
+
+    <div class="col-lg-6 col-md-6 col-12">
+      <div class="stat-row border-navy">
+        <div class="stat-icon-section">
+          <div class="icon-circle bg-navy">
+            <i class="fa-solid fa-users"></i>
+          </div>
+        </div>
+
+        <div class="stat-data-section">
+          <span class="stat-label">LEAVE INFO</span>
+          <h2 class="stat-value">{{leaveStatus}}</h2>
+        </div>
+
+        <div class="stat-action-section">
+          <a routerLink="/leave-mgmt" class="action-btn">
+            More Info <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6 col-md-6 col-12">
+      <div class="stat-row border-teal">
+        <div class="stat-icon-section">
+          <div class="icon-circle bg-teal">
+            <i class="fa-solid fa-house-laptop"></i>
+          </div>
+        </div>
+
+        <div class="stat-data-section">
+          <span class="stat-label">WFH INFO</span>
+          <h2 class="stat-value">0</h2>
+        </div>
+
+        <div class="stat-action-section">
+          <a routerLink="/attendance-mgmt" class="action-btn">
+            More Info <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6 col-md-6 col-12">
+      <div class="stat-row border-purple">
+        <div class="stat-icon-section">
+          <div class="icon-circle bg-purple">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </div>
+
+        <div class="stat-data-section">
+          <span class="stat-label">MY TEAM</span>
+          <h2 class="stat-value">0</h2>
+        </div>
+
+        <div class="stat-action-section">
+          <a routerLink="/employees-details" class="action-btn">
+            More Info <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6 col-md-6 col-12">
+      <div class="stat-row border-red">
+        <div class="stat-icon-section">
+          <div class="icon-circle bg-red">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+        </div>
+
+        <div class="stat-data-section">
+          <span class="stat-label">DAILY WORK TIME</span>
+          <h2 class="stat-value">{{dailyWorkTime}}</h2>
+        </div>
+
+        <div class="stat-action-section">
+          <a routerLink="/attendance-mgmt" class="action-btn">
+            More Info <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</app-page-layout>

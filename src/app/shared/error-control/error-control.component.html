@@ -1,0 +1,5 @@
+<div class="error-container" *ngIf="control?.invalid && (control?.touched || control?.dirty)">
+    <small class="error-text">
+      {{ control?.errors | errorMsg: labelName }}
+    </small>
+  </div>

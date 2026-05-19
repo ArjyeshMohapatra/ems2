@@ -1,0 +1,116 @@
+:host {
+  display: block;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+.resizable-table {
+  table-layout: auto;
+}
+
+:host ::ng-deep table {
+  width: max-content;
+  min-width: 100%;
+  background: #ffffff;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+}
+
+:host ::ng-deep th.mat-header-cell,
+:host ::ng-deep th.mat-mdc-header-cell {
+  background: #eef6ff;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding: 13px 16px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #dbe7f3;
+  border-right: 1px solid #e8eef6;
+}
+
+:host ::ng-deep td.mat-cell,
+:host ::ng-deep td.mat-mdc-cell {
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #eef2f7;
+  white-space: nowrap;
+  border-right: 1px solid #f1f5f9;
+}
+
+:host ::ng-deep tr.mat-row:hover td.mat-cell,
+:host ::ng-deep tr.mat-mdc-row:hover td.mat-mdc-cell {
+  background: #f8fbff;
+}
+
+:host ::ng-deep tr.mat-row:last-child td.mat-cell,
+:host ::ng-deep tr.mat-mdc-row:last-child td.mat-mdc-cell {
+  border-bottom: 0;
+}
+
+:host ::ng-deep .table-resize-handle {
+  opacity: 0;
+  background: #93c5fd;
+  transition: opacity 120ms ease;
+}
+
+:host ::ng-deep th:hover .table-resize-handle {
+  opacity: 1;
+}
+
+mat-paginator {
+  border-top: 1px solid #eef2f7;
+}
+
+@media (max-width: 768px) {
+  .table-wrapper {
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .resizable-table {
+    table-layout: auto;
+  }
+
+  col {
+    width: auto !important;
+  }
+
+  :host ::ng-deep th.mat-header-cell,
+  :host ::ng-deep th.mat-mdc-header-cell,
+  :host ::ng-deep td.mat-cell,
+  :host ::ng-deep td.mat-mdc-cell {
+    font-size: 12px;
+    padding: 10px 8px;
+    /* white-space: normal; */
+    word-break: break-word;
+  }
+
+  :host ::ng-deep .table-resize-handle {
+    display: none;
+  }
+}

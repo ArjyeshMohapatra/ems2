@@ -1,0 +1,32 @@
+<header class="header">
+  <h2 class="header-title">{{ title }}</h2>
+
+  <div class="header-actions">
+    <div class="profile-wrapper">
+      <span class="header-profile" (click)="togglePopup($event)">
+        EMP
+      </span>
+
+      <div
+        class="profile-popup"
+        *ngIf="showPopup"
+        (click)="$event.stopPropagation()"
+      >
+        <a routerLink="/edit-profile" style="text-decoration: none;color: inherit;"><span class="profile-option">Profile</span></a>
+        <span class="logout" (click)="logout()">Logout</span>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="mobile-menu-btn"
+      (click)="toggleMobileSidebar($event)"
+      aria-controls="appSidebar"
+      [attr.aria-expanded]="sidebarState.isMobileOpen"
+      aria-label="Toggle sidebar"
+      title="Toggle sidebar"
+    >
+      <i class="fa-solid" [ngClass]="sidebarState.isMobileOpen ? 'fa-xmark' : 'fa-bars'"></i>
+    </button>
+  </div>
+</header>

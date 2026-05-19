@@ -1,0 +1,28 @@
+.search-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 450px;
+    margin: 0 auto 1rem auto;
+  }
+  
+  .search-pill input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    min-width: 0;
+    padding-left: 1px;
+  }
+
+  :host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }

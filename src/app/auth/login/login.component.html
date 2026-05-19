@@ -1,0 +1,36 @@
+<div class="page-shell auth-page">
+  <h1 class="page-title">EMS</h1>
+  <div class="container">
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <label for="login-email">Email</label>
+      <input
+        id="login-email"
+        formControlName="email"
+        type="email"
+        placeholder="Enter Email"
+      />
+
+      <label for="login-password">Password</label>
+      <input
+        id="login-password"
+        formControlName="password"
+        type="password"
+        placeholder="Enter Password"
+      />
+
+      <button type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Logging In...' : 'Login' }}
+      </button>
+
+      <p class="forgot-link">
+        <a routerLink="/forgot-password">Forgot password ?</a>
+      </p>
+
+      <p class="auth-link">
+        Don't have an account? <a routerLink="/signup">Create one</a>
+      </p>
+    </form>
+  </div>
+</div>

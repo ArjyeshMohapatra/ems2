@@ -1,0 +1,111 @@
+.header {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 20px;
+  background: #0f172a;
+  color: #ffffff;
+  flex-shrink: 0;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 1000;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+}
+
+.header-title {
+  margin: 0;
+  min-width: 0;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: rgba(102, 180, 248, 0.2);
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2)
+}
+
+.header-profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #0f766e;
+  box-shadow: 0 8px 20px rgba(15, 118, 110, 0.24);
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-popup {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 150px;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.16);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-option,
+.logout {
+  display: block;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.profile-option:hover,
+.logout:hover {
+  background: #f3f4f6;
+}
+
+.mobile-menu-btn {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  display: none;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: 0 14px;
+  }
+
+  .mobile-menu-btn {
+    display: grid;
+  }
+}

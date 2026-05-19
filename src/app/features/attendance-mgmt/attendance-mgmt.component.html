@@ -1,0 +1,108 @@
+<app-page-layout [title]="'Attendance Management'">
+	<div class="row mb-3 gx-3 justify-content-start">
+		<div class="col-md-4 col-lg-3">
+		  <div class="input-group input-group-sm">
+			<span class="input-group-text bg-light text-secondary">Month :</span>
+			<select class="form-select" [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+				<option *ngFor="let month of months" [value]="month">
+					{{ month }}
+				</option>
+			</select>
+		  </div>
+		</div>
+		<div class="col-md-4 col-lg-3">
+		  <div class="input-group input-group-sm">
+			<span class="input-group-text bg-light text-secondary">Status :</span>
+			<select class="form-select" [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+				<option *ngFor="let item of status" [value]="item">{{item}}</option>
+			</select>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="row mb-4 gx-3">
+		<div class="col-md-3">
+		  <div class="input-group input-group-sm">
+			<span class="input-group-text bg-light text-secondary">Total Present : </span>
+			<input type="text" class="form-control bg-light" [value]="totalPresent" readonly>
+		  </div>
+		</div>
+		<!-- <div class="col-md-3">
+		  <div class="input-group input-group-sm">
+			<span class="input-group-text bg-light text-secondary">Total WFH :</span>
+			<input type="text" class="form-control bg-light" value="0" readonly>
+		  </div>
+		</div> -->
+		<!-- <div class="col-md-3">
+		  <div class="input-group input-group-sm">
+			<span class="input-group-text bg-light text-secondary">Total Leaves :</span>
+			<input type="text" class="form-control bg-light" value="0" readonly>
+		  </div>
+		</div> -->
+		<div class="col-md-3">
+		  <div class="input-group input-group-sm">
+			<span class="input-group-text bg-light text-secondary">Total Absent :</span>
+			<input type="text" class="form-control bg-light" [value]="totalAbsent" readonly>
+		  </div>
+		</div>
+	  </div>
+
+	  <app-search-bar 
+	  placeholder="Search attendance..."
+	  (search)="filterAttendance($event)" 
+	  ></app-search-bar>
+
+	  <div class="table-responsive border rounded">
+		<app-table 
+		[dataSource]="dataSource" 
+		[displayedColumns]="displayedColumns"
+		[totalRecords]="totalRecords"
+		(pageChange)="onPageChange($event)"
+		class="w-100 attendance-table">
+
+		  <ng-container matColumnDef="slNo">
+			<th mat-header-cell *matHeaderCellDef class="text-center"> Sl No. </th>
+			<td mat-cell *matCellDef="let element" class="text-center" > {{element.slNo}} </td>
+		  </ng-container>
+
+		  <ng-container matColumnDef="date">
+			<th mat-header-cell *matHeaderCellDef class="text-center"> Date [Day] </th>
+			<td mat-cell *matCellDef="let element" class="text-center" > {{element.date}} </td>
+		  </ng-container>
+
+		  <ng-container matColumnDef="firstIn">
+			<th mat-header-cell *matHeaderCellDef class="text-center"> First IN </th>
+			<td mat-cell *matCellDef="let element" class="text-center" >
+				<button *ngIf="!element.firstIn && element.date === getToday()" class="btn btn-sm btn-success" (click)="checkIn()">Check In</button>
+					<span *ngIf="element.firstIn">{{ element.firstIn || 'NA' }}</span>
+			</td>
+		  </ng-container>
+
+		  <ng-container matColumnDef="lastOut">
+			<th mat-header-cell *matHeaderCellDef class="text-center"> Last OUT </th>
+			<td mat-cell *matCellDef="let element" class="text-center" >
+				<button *ngIf="element.firstIn && !element.lastOut && element.date === getToday()" class="btn btn-sm btn-danger" (click)="checkOut()">Check Out</button>
+					<span *ngIf="element.lastOut">{{ element.lastOut || 'NA' }}</span>
+			</td>
+		  </ng-container>
+
+		  <ng-container matColumnDef="actualWorkTime">
+			<th mat-header-cell *matHeaderCellDef class="text-center"> Actual Work Time </th>
+			<td mat-cell *matCellDef="let element" class="text-center" > {{element.actualWorkTime || 'NA'}} </td>
+		  </ng-container>
+
+		  <ng-container matColumnDef="status">
+			<th mat-header-cell *matHeaderCellDef class="text-center">Status</th>
+			<td mat-cell *matCellDef="let element" class="text-center">
+			  <span 
+			  [style.color]="
+			  element.status === 'Present' ? 'green' : 
+			  element.status === 'WFH' ? 'blue' : 
+			  element.status === 'Leave' ? 'orange' : 'red'">
+			  {{ element.status || 'NA' }}</span>
+			</td>
+		  </ng-container>
+		</app-table>
+		
+	  </div>
+</app-page-layout>

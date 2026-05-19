@@ -1,0 +1,37 @@
+<div class="notify-stack" *ngIf="notify.visible">
+  <section
+    class="notify-box"
+    [ngClass]="notify.type"
+    role="alert"
+    aria-live="assertive"
+  >
+    <div class="notify-icon">
+      @if(notify.type()==='success'){
+        <span>OK</span>
+      }
+      @if(notify.type()==='warning'){
+        <span>!</span>
+      }
+      @if(notify.type()==='info'){
+        <span>i</span>
+      }
+      @if(notify.type()==='error' || !notify.type){
+        <span>x</span>
+      }
+    </div>
+
+    <div class="notify-content">
+      <strong>{{ notify.title() }}</strong>
+      <p>{{ notify.message() }}</p>
+    </div>
+
+    <button
+      type="button"
+      class="notify-close"
+      (click)="notify.close()"
+      aria-label="Close notification"
+    >
+      <i class="fa-solid fa-x"></i>
+    </button>
+  </section>
+</div>

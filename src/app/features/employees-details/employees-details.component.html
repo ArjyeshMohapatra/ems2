@@ -1,0 +1,131 @@
+<app-page-layout [title]="'Employees Details'">
+	<div class="d-flex justify-content-start align-items-center gap-2 mb-3">
+		<label for="deptSelect" lass="mb-0"><strong>Filter by Department:</strong></label>
+
+		<select
+		id="deptSelect"
+		  #deptSelect
+		  class="form-select w-auto"
+		  aria-label="Filter by Department"
+		  (change)="filterByDepartment(deptSelect.value)"
+		>
+		  <option value="ALL">All</option>
+
+		  <option
+			*ngFor="let dept of departments"
+			[value]="dept"
+		  >
+			{{ dept }}
+		  </option>
+		</select>
+	  </div>
+	  
+	  <div class="mb-4 chart-container">
+		<canvas id="deptChart"></canvas>
+	  </div>
+
+	  <app-search-bar 
+	  placeholder="Search employee..."
+	  (search)="filterEmployees($event)"
+	  ></app-search-bar>
+	  <div class="table-wrapper">
+		<app-table
+		  [dataSource]="dataSource"
+		  [displayedColumns]="displayedColumns"
+		  [defaultColumnWidths]="defaultColumnWidths"
+		  [columnStorageKey]="'employeeColumnWidths'"
+		  [totalRecords]="totalRecords"
+		  (pageChange)="onPageChange($event)">
+		  class="table table-hover mb-0 mat-elevation-z0">
+
+		  <!-- Sl No -->
+		  <ng-container matColumnDef="slNo">
+			<th mat-header-cell *matHeaderCellDef>
+				Sl. No
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{element.slNo}}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Name -->
+		  <ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Name
+			</th>
+			<td mat-cell *matCellDef="let element"
+			>
+			  {{element.name}}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Designation -->
+		  <ng-container matColumnDef="designation">
+			<th mat-header-cell *matHeaderCellDef>
+				Designation
+			</th>
+			<td mat-cell *matCellDef="let element">
+			  {{ element.designation }}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Employee Type -->
+		  <ng-container matColumnDef="emp_type">
+			<th mat-header-cell *matHeaderCellDef>
+				Employee Type
+			</th>
+			<td mat-cell *matCellDef="let element">
+			  {{ element.emp_type }}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Gender -->
+		  <ng-container matColumnDef="gender">
+			<th mat-header-cell *matHeaderCellDef>
+				Gender
+			</th>
+			<td mat-cell *matCellDef="let element">
+			  {{ element.gender }}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Joining Date -->
+		  <ng-container matColumnDef="joining_date">
+			<th mat-header-cell *matHeaderCellDef>
+				Joining Date
+			</th>
+			<td mat-cell *matCellDef="let element">
+			  {{ element.joining_date }}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Phone -->
+		  <ng-container matColumnDef="phone">
+			<th mat-header-cell *matHeaderCellDef>
+				Phone
+			</th>
+			<td mat-cell *matCellDef="let element">
+			  {{ element.phone }}
+			</td>
+		  </ng-container>
+
+
+		  <!-- Email -->
+		  <ng-container matColumnDef="email">
+			<th mat-header-cell *matHeaderCellDef>
+				Email
+			</th>
+			<td mat-cell *matCellDef="let element">
+			  {{ element.email }}
+			</td>
+		  </ng-container>
+
+		</app-table>
+	  </div>
+</app-page-layout>

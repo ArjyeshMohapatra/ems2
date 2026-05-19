@@ -1,0 +1,197 @@
+<div class="page-shell employee-page">
+  <h1 class="page-title">EMS</h1>
+
+  <div class="container employee-container">
+    <div class="form-header">
+      <p class="form-eyebrow">Employee onboarding</p>
+      <h2>Basic Registration</h2>
+    </div>
+
+    <form class="employee-form" [formGroup]="empForm" (ngSubmit)="onSubmit()">
+      <section class="section-card" formGroupName="employee">
+        <div class="section-heading">
+          <p class="section-index">Section 01</p>
+          <h3>Employee Details</h3>
+        </div>
+
+        <div class="field-grid">
+
+          <div class="field field--4">
+            <label for="first-name">First Name</label>
+            <input id="first-name" placeholder="First Name" formControlName="first_name" />
+          </div>
+
+          <div class="field field--4">
+            <label for="last-name">Last Name</label>
+            <input id="last-name" placeholder="Last Name" formControlName="last_name" />
+          </div>
+
+          <div class="field field--4">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" inputmode="tel" placeholder="Phone Number" formControlName="phone" />
+            <p class="error" *ngIf="empForm.get('employee.phone')?.touched && empForm.get('employee.phone')?.errors?.['invalidPhoneNumber']">Invalid phone number</p>
+          </div>
+
+          <div class="field field--4">
+            <label for="date-of-birth">Date of Birth</label>
+            <input id="date-of-birth" type="date" formControlName="date_of_birth" />
+          </div>
+
+          <div class="field field--4">
+            <label for="gender">Gender</label>
+            <select id="gender" formControlName="gender">
+              <option value="">Select Gender</option>
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+              <option value="OTHER">OTHER</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card" formGroupName="employeeDetails">
+        <div class="section-heading">
+          <p class="section-index">Section 02</p>
+          <h3>Personal Details</h3>
+        </div>
+
+        <div class="field-grid">
+          <div class="field field--12">
+            <label for="address">Address</label>
+            <textarea id="address" rows="3" placeholder="Street, area, landmark" formControlName="address"></textarea>
+          </div>
+
+          <div class="field field--4">
+            <label for="city">City</label>
+            <input id="city" placeholder="City" formControlName="city" />
+          </div>
+
+          <div class="field field--4">
+            <label for="state">State</label>
+            <input id="state" placeholder="State" formControlName="state" />
+          </div>
+
+          <div class="field field--4">
+            <label for="country">Country</label>
+            <input id="country" placeholder="Country" formControlName="country" />
+          </div>
+
+          <div class="field field--4">
+            <label for="pincode">Pincode</label>
+            <input id="pincode" type="text" inputmode="numeric" placeholder="Pincode" formControlName="pincode" />
+          </div>
+
+          <div class="field field--4">
+            <label for="emergency-contact">Emergency Contact</label>
+            <input
+              id="emergency-contact"
+              type="tel"
+              inputmode="tel"
+              placeholder="Emergency contact"
+              formControlName="emergency_contact"
+            />
+            <p class="error" *ngIf="empForm.get('employeeDetails.emergency_contact')?.touched && empForm.get('employeeDetails.emergency_contact')?.errors?.['invalidPhoneNumber']">Invalid phone number</p>
+          </div>
+
+          <div class="field field--4">
+            <label for="marital-status">Marital Status</label>
+            <select id="marital-status" formControlName="marital_status">
+              <option value="">Select Status</option>
+              <option value="SINGLE">SINGLE</option>
+              <option value="MARRIED">MARRIED</option>
+            </select>
+          </div>
+
+          <div class="field field--4">
+            <label for="aadhar-no">Aadhar Number</label>
+            <input id="aadhar-no" type="text" inputmode="numeric" placeholder="Aadhar number" formControlName="aadhar_no" />
+            <p class="error" *ngIf="empForm.get('employeeDetails.aadhar_no')?.touched && empForm.get('employeeDetails.aadhar_no')?.errors?.['invalidAadharNumber']">Invalid Aadhar number</p>
+          </div>
+
+          <div class="field field--4">
+            <label for="father-name">Father Name</label>
+            <input id="father-name" placeholder="Father name" formControlName="father_name" />
+          </div>
+
+          <div class="field field--4">
+            <label for="mother-name">Mother Name</label>
+            <input id="mother-name" placeholder="Mother name" formControlName="mother_name" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card" formGroupName="jobDetails">
+        <div class="section-heading">
+          <p class="section-index">Section 03</p>
+          <h3>Job Details</h3>
+        </div>
+
+        <div class="field-grid">
+          <div class="field field--4">
+            <label for="designation">Designation</label>
+            <input id="designation" placeholder="Designation" formControlName="designation" />
+          </div>
+
+          <div class="field field--4">
+            <label for="department">Department</label>
+            <select id="department" formControlName="department">
+              <option value="">Select Department</option>
+              <option value="BUSINESS">BUSINESS</option>
+              <option value="IT">IT</option>
+              <option value="WEBDEV">WEBDEV</option>
+              <option value="AI">AI</option>
+              <option value="MOBILEDEV">MOBILEDEV</option>
+              <option value="IOSDEV">IOSDEV</option>
+            </select>
+          </div>
+
+          <div class="field field--4">
+            <label for="employee-type">Employee Type</label>
+            <select id="employee-type" formControlName="employee_type">
+              <option value="">Select Type</option>
+              <option value="FULLTIME">FULLTIME</option>
+              <option value="CONTRACT">CONTRACT</option>
+              <option value="INTERN">INTERN</option>
+            </select>
+          </div>
+
+          <div class="field field--4">
+            <label for="salary">Salary</label>
+            <input id="salary" type="number" min="0" placeholder="Salary" formControlName="salary" />
+            <p class="error" *ngIf="empForm.get('jobDetails.salary')?.touched && empForm.get('jobDetails.salary')?.errors?.['invalidSalary']">Invalid salary format</p>
+          </div>
+
+          <div class="field field--4">
+            <label for="joining-date">Joining Date</label>
+            <input id="joining-date" type="date" formControlName="joining_date" />
+          </div>
+
+          <div class="field field--4">
+            <label for="experience-duration">Experience Duration</label>
+            <input
+              id="experience-duration"
+              type="number"
+              min="0"
+              placeholder="Years of experience"
+              formControlName="experience_duration"
+            />
+          </div>
+
+          <div class="field field--12">
+            <label for="skills">Skills</label>
+            <textarea id="skills" rows="2" placeholder="Comma separated skills" formControlName="skills"></textarea>
+          </div>
+
+          <div class="field field--12">
+            <label for="prev-org">Previous Org</label>
+            <textarea id="prev-org" rows="2" placeholder="Comma separated previous organizations" formControlName="prev_org"></textarea>
+          </div>
+        </div>
+      </section>
+                                          
+      <div class="form-actions">
+        <button type="submit">Register Employee</button>
+      </div>
+    </form>
+  </div>
+</div>

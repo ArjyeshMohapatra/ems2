@@ -1,0 +1,20 @@
+
+.forgot-link,
+.auth-link {
+  margin-top: 14px;
+  text-align: center;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.forgot-link a,
+.auth-link a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-link a:hover,
+.auth-link a:hover {
+  text-decoration: underline;
+}
