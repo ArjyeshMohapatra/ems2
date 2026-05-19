@@ -1,5 +1,6 @@
 <div class="dashboard-page" [class.sidebar-collapsed]="sidebarState.isCollapsed()"
-[class.mobile-sidebar-open]="sidebarState.isMobileOpen()">
+[class.mobile-sidebar-open]="sidebarState.isMobileOpen()"
+[class.sidebar-animating]="sidebarState.isAnimating()">
   <app-header [title]="title"></app-header>
 
   <div class="dashboard-body">

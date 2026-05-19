@@ -7,13 +7,16 @@
   border-right: 1px solid rgba(148, 163, 184, 0.18);
   box-shadow: 12px 0 30px rgba(15, 23, 42, 0.14);
   box-sizing: border-box;
-  transition: width 0.25s ease, flex-basis 0.25s ease, padding 0.25s ease;
   height: calc(100vh - 5rem);
   position: fixed;
   top: 5rem;
   bottom: 0;
   left:0;
   z-index: 999;
+}
+
+.sidebar.sidebar-animating{
+  transition: width 0.25s ease, flex-basis 0.25s ease, padding 0.25s ease;
 }
 
 .sidebar-top {

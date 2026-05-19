@@ -9,6 +9,7 @@ export class SidebarStateService {
 
   isCollapsed = signal(false);
   isMobileOpen = signal(false);
+  isAnimating = signal(false);
 
   constructor(@Inject(DOCUMENT) document: Document) {
     this.body = document.body;
@@ -20,6 +21,11 @@ export class SidebarStateService {
     this.isCollapsed.set(!this.isCollapsed());
     localStorage.setItem('emsSidebarCollapsed', String(this.isCollapsed()));
     this.syncBodyClasses();
+
+    setTimeout(() => {
+      this.isAnimating.set(false);
+      this.syncBodyClasses();
+    },250)
   }
 
   toggleMobileSidebar(): void {
@@ -39,5 +45,6 @@ export class SidebarStateService {
   private syncBodyClasses(): void {
     this.body.classList.toggle('sidebar-collapsed', this.isCollapsed());
     this.body.classList.toggle('mobile-sidebar-open', this.isMobileOpen());
+    this.body.classList.toggle('sidebar-animating', this.isAnimating());
   }
 }

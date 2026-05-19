@@ -1,3 +1,7 @@
+:root {
+    --sidebar-expanded: 220px;
+    --sidebar-collapsed: 80px; }
+
 .dashboard-page {
 	min-height: 100vh;
 	display: flex;
@@ -18,8 +22,11 @@
 	min-width: 0;
 	box-sizing: border-box;
 	margin-left: var(--sidebar-expanded);
-    transition: margin-left 0.25s ease;
 	overflow: auto;
+}
+
+.dashboard-page.sidebar-animating .content{
+	transition: margin-left 0.25s ease;
 }
 
 .dashboard-page.sidebar-collapsed .content {
