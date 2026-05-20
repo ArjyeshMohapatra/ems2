@@ -5,9 +5,12 @@ import { inject } from '@angular/core';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const logger = inject(EventLoggerService);
-  const correlationId = crypto.randomUUID();
+  const correlationId = crypto?.randomUUID?.() || Math.random().toString(36).substring(2);
+  const isLeavePolling = req.url.includes('leaveservice?status=PENDING') || req.url.includes('leaveservice');
 
-  logger.log('AuthInterceptor', 'HTTP_REQUEST_STARTED', { url: req.url, id: correlationId });
+  if (!isLeavePolling) {
+    logger.log('AuthInterceptor', 'HTTP_REQUEST_STARTED', { url: req.url, id: correlationId });
+  }
   const token = localStorage.getItem('authToken');
 
   const authReq = token ? req.clone({
@@ -18,13 +21,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(authReq).pipe(
     tap(event => {
-      if(event instanceof HttpResponse) logger.log('AuthInterceptor', 'HTTP_RESPONSE_RECEIVED', { url: req.url, id: correlationId });
+      if (event instanceof HttpResponse && !isLeavePolling) {
+        logger.log('AuthInterceptor', 'HTTP_RESPONSE_RECEIVED', { id: correlationId });
+      }
     }),
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
         localStorage.removeItem('authToken');
       }
-      logger.log('AuthInterceptor', 'HTTP_ERROR', { url: req.url, id: correlationId, error: error.status });
+      if (!isLeavePolling) {
+        logger.log('AuthInterceptor', 'HTTP_ERROR', { url: req.url, id: correlationId, error: error.status });
+      }
       return throwError(() => error);
     })
   );

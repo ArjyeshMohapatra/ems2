@@ -56,7 +56,7 @@ export class LoginComponent {
     this.auth.login(email, password)
       .pipe(
         switchMap((res: AuthResponse) => {
-          this.logger.log('LoginComponent', 'FETCHING_RESPONSE_FROM_SERVER', {result: res.message});
+          this.logger.log('LoginComponent', 'AUTH_RESPONSE_RECEIVED', {result: res});
           if (res?.message !== 'success') throw res;
           const token = res?.token?.token;
           if (!token) {

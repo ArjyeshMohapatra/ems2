@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
-import { EventLoggerService, AppEvent } from '@core/services';
-import { scan } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { EventLoggerService } from '@core/services';
 
 @Component({
   selector: 'app-event-visualizer',
@@ -17,9 +15,9 @@ import { Observable } from 'rxjs';
 })
 export class EventVisualizerComponent {
   private logger = inject(EventLoggerService);
-  
-  // 'scan' accumulates events into an array so we have a full history
-  events$: Observable<AppEvent[]> = this.logger.events$.pipe(
-    scan((acc: AppEvent[], curr: AppEvent) => [curr, ...acc], [])
-  );
+  events$ = this.logger.events$;
+
+  clear() {
+    this.logger.clearLogs();
+  }
 }

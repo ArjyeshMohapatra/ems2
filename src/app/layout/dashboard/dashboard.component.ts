@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Replaces CommonModule from the old module
 import { RouterModule } from '@angular/router'; // Required for routerLink in HTML
+import { filter, take } from 'rxjs';
 
 // Services
 import { AttendanceService, LeaveService, CheckRegistrationService, LoadingService } from '@core/services';
@@ -32,8 +33,12 @@ export class DashboardComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     const startTime = Date.now();
     // Wait for the service to provide a valid ID
-    this.crs.employeeId$.subscribe(id => {
-      if (id) {
+    this.crs.employeeId$
+      .pipe(
+        filter(id => !!id),
+        take(1) // Only fetch once when ID becomes available
+      )
+      .subscribe(id => {
         this.loader.show();
         
         this.loadDailyWorkTime();
@@ -42,8 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy{
         setTimeout(() => {
           this.loader.hide(startTime);
         }, 1000);
-      }
-    });
+      });
   }
 
   ngOnDestroy(): void {

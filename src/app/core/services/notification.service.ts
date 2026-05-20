@@ -30,7 +30,9 @@ export class NotificationService {
     this.timer = undefined;
   }
 
-  showError(error: any) {
+  showError(error: unknown) {
+    console.log('FULL ERROR OBJECT => ', error);
+
     const info = this.translate(error);
     this.show(info.title, info.message, 'error');
   }
@@ -47,12 +49,17 @@ export class NotificationService {
     this.show(title, message, 'info');
   }
 
-  private translate(error: any) {
-    const backendMessage = error?.error?.message;
-    const browserMessage = error?.message || '';
-    const status = error?.status;
+  private translate(error: unknown) {
+    const err = error as any;
+    const backendMessage =
+        err?.error?.message ||
+        err?.error?.error ||
+        err?.error?.msg ||
+        err?.error;
+    const browserMessage = err?.message || '';
+    const status = err?.status;
 
-    if (backendMessage) {
+    if (typeof backendMessage === 'string' && backendMessage.trim()) {
       return {
         title: 'Request failed',
         message: backendMessage
@@ -73,7 +80,7 @@ export class NotificationService {
       };
     }
 
-    if (browserMessage.includes('Http failure response')) {
+    if (status == 401) {
       return {
         title: 'Request failed',
         message: browserMessage
