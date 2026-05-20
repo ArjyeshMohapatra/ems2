@@ -5,6 +5,7 @@ import { ATTENDANCE_ROUTES, EDIT_PROFILE_ROUTES, EMPLOYEES_DETAILS_ROUTES, HR_PO
 import { DASHBOARD_ROUTES } from './layout/dashboard/dashboard-route'; // No alias for layout yet
 import { EMP_BASIC_DETAILS_ROUTES } from './layout/emp-basic-details/emp-basic-details-route';
 import { NOT_FOUND_ROUTES } from '@shared';
+import { EventVisualizerComponent } from '@shared/ui/event-visualizer/event-visualizer';
 
 import { guestGuard, authGuard, registrationGuard, hrPortalGuard } from '@core/guards';
 
@@ -81,6 +82,11 @@ export const routes: Routes = [
       import('./layout/emp-basic-details/emp-basic-details-route')
         .then(m => m.EMP_BASIC_DETAILS_ROUTES),
     canActivate: [authGuard, registrationGuard]
+  },
+  {
+    path: 'debug/events',
+    component: EventVisualizerComponent
+
   },
   {
     path: '**',

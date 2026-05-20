@@ -1,0 +1,10 @@
+<div class="p-4 bg-gray-900 text-green-400 font-mono h-screen overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4 border-b border-gray-700">Live Application Trace</h2>
+
+    <div *ngFor="let event of events$ | async" class="mb-2 p-2 border-b border-gray-800 hover:bg-gray-800 transition">
+        <span class="text-gray-500 text-xs">{{ event.timestamp | date:'HH:mm:ss.SSS' }}</span>
+        <span class="ml-2 font-bold text-blue-400">[{{ event.source }}]</span>
+        <span class="ml-2 text-white">{{ event.action }}</span>
+        <pre class="text-gray-400 text-xs mt-1">{{ event.metadata | json }}</pre>
+    </div>
+    </div>  

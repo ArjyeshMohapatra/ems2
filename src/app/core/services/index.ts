@@ -6,3 +6,4 @@ export * from './leave.service';
 export * from './loading.service';
 export * from './notification.service';
 export * from './session.service';
+export * from './event-logger'
