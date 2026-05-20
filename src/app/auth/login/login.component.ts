@@ -45,6 +45,7 @@ export class LoginComponent {
     this.logger.log('LoginComponent', 'USER_CLICKED_LOGIN', { email: this.loginForm.controls.email.value });
     if (this.loginForm.invalid || this.isSubmitting()) {
       this.loginForm.markAllAsTouched();
+      this.logger.log('LoginComponent', 'INCOMPLETE_SUBMISSION', {});
       this.notify.showWarning('Warning', 'Please complete the form correctly.');
       return;
     }

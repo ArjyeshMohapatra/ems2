@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { MatFormFieldModule } from "@angular/material/form-field";
 
 // Existing Service and Validator Imports
-import { AuthService, NotificationService } from '@core/services';
+import { AuthService, NotificationService, EventLoggerService } from '@core/services';
 import { EmailValidator } from '@core/validators';
 
 interface AuthResponse {
@@ -36,6 +36,7 @@ export class SignUpComponent implements OnDestroy {
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private notify = inject(NotificationService);
+  private logger = inject(EventLoggerService);
 
   signupForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, EmailValidator]],
@@ -50,8 +51,10 @@ export class SignUpComponent implements OnDestroy {
   }
 
   onSignUp(): void {
+    this.logger.log('SignupComponent', 'USER_CLICKED_ON_SIGNUP', {});
     if (this.signupForm.invalid || this.isSubmitting() || this.isRedirecting()) {
       this.signupForm.markAllAsTouched();
+      this.logger.log('SignupComponent', 'INCOMPLETE_SUBMISSION', {});
       this.notify.showWarning('Invalid form', 'Please complete the form correctly.');
       return;
     }
@@ -67,19 +70,23 @@ export class SignUpComponent implements OnDestroy {
         this.isSubmitting.set(false);
       }))
       .subscribe({
-      next: (res: AuthResponse) => {
+        next: (res: AuthResponse) => {
+          this.logger.log('SignupComponent', 'AUTH_RESPONSE_RECEIVED', {result: res});
         if (res?.success) {
           this.notify.showSuccess('Signup successful', 'Redirecting to login...');
           this.isRedirecting.set(true);
+          this.logger.log('SignupComponent', 'REDIRECTING_TO_LOGIN', {});
           this.redirectTimerId = setTimeout(() => {
             this.router.navigate(['/login']);
           }, 1200);
           return;
         }
-        this.notify.showWarning('Signup failed', res?.message || 'Please try again.');
+          this.notify.showWarning('Signup failed', res?.message || 'Please try again.');
+          this.logger.log('SignupComponent', 'SIGNUP_FAILED', {result: res?.message});
       },
-      error: () => {
+      error: (err) => {
         this.notify.showWarning('Signup unavailable', 'Unable to sign up right now. Please try again.');
+        this.logger.log('SignupComponent', 'UNABLE_TO_SIGNUP_TRY_LATER', {err});
       }
     });
   }
